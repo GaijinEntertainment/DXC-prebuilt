@@ -53,18 +53,19 @@ def clone_git_repo(DXC_PACKAGE, DXC_VERSION):
   run({'git submodule update'})
   os.chdir(prev_cwd)
 
-def download_prebuilt_win():
-  download_url('https://github.com/microsoft/DirectXShaderCompiler/releases/download/v1.7.2207/dxc_2022_07_18.zip')
-  with zipfile.ZipFile(os.path.normpath('.packages/dxc_2022_07_18.zip'), 'r') as zip_file:
+def download_prebuilt_win(DXC_PACKAGE, DXC_VERSION, DXC_BIN_ZIP):
+  download_url('https://github.com/microsoft/{0}/releases/download/v{1}/{2}'.format(DXC_PACKAGE, DXC_VERSION, DXC_BIN_ZIP))
+  with zipfile.ZipFile(os.path.normpath('.packages/{0}'.format(DXC_BIN_ZIP)), 'r') as zip_file:
     zip_file.extractall('.packages/_win')
 
 # prepare base package data
 DXC_PACKAGE = 'DirectXShaderCompiler'
 DXC_VERSION = '1.7.2207'
+DXC_BIN_ZIP = 'dxc_2022_07_18.zip'
 
 pathlib.Path('.packages').mkdir(parents=True, exist_ok=True)
 clone_git_repo(DXC_PACKAGE, DXC_VERSION)
-download_prebuilt_win()
+download_prebuilt_win(DXC_PACKAGE, DXC_VERSION, DXC_BIN_ZIP)
 
 if pathlib.Path('DXC-{0}'.format(DXC_VERSION)).exists():
   shutil.rmtree('DXC-{0}'.format(DXC_VERSION))

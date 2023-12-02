@@ -6,7 +6,7 @@ Requirements for building DXC package:
 
 ## How to Build
 
-First start `python3 s1_prepare_package.py`, this will clone DXC repo from github, checkout required version and download prebuilt win64 package.
+First start `python3 s1_prepare_package.py`, this will clone [DXC repo from github](https://github.com/microsoft/DirectXShaderCompiler), checkout required version and download prebuilt win64 package.
 Then it will create base DXC-* folder composed of actual include and lib folders (with `lib/win64` being filled with content of prebuilt win64 package)
 
 Next start `s2_build_linux64.sh` (on linux) or `s2_build_macosx.sh` (on macOS) to build libdxcompiler.so and dxcompiler.dylib respectively.
