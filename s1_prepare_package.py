@@ -84,5 +84,5 @@ except OSError as e:
   print('Ignoring OSError {0}'.format(e))
 
 print('Basic folder prepared: DXC-{0}/include'.format(DXC_VERSION))
-print('Build linux64 and macosx libraries using ./build_linux64.sh and /build_macosx.sh\n  (place results to ..lib/linux64 and ..lib\macosx)')
-print('And run ./build_result_zip.sh to finally get .zip for upload')
+print('Build linux64 and macosx libraries using ./s2_build_linux64.sh and ./s2_build_macosx.sh\n  (places results to ..lib/linux64 and ..lib/macosx)')
+print('And run ./s3_make_package.sh to finally get .tar.gz for upload')
