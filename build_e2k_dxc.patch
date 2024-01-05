@@ -1,0 +1,13 @@
+diff --git a/cmake/config-ix.cmake b/cmake/config-ix.cmake
+index 098e2574a..7145a9e1b 100644
+--- a/cmake/config-ix.cmake
++++ b/cmake/config-ix.cmake
+@@ -363,6 +363,8 @@ elseif (LLVM_NATIVE_ARCH MATCHES "wasm32")
+   set(LLVM_NATIVE_ARCH WebAssembly)
+ elseif (LLVM_NATIVE_ARCH MATCHES "wasm64")
+   set(LLVM_NATIVE_ARCH WebAssembly)
++elseif (LLVM_NATIVE_ARCH MATCHES "e2k")
++  set(LLVM_NATIVE_ARCH Elbrus2000)
+ else ()
+   message(FATAL_ERROR "Unknown architecture ${LLVM_NATIVE_ARCH}")
+ endif ()

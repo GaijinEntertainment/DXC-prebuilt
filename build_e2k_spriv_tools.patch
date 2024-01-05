@@ -1,0 +1,31 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 76b87d8c..1d9a5bf6 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -93,7 +93,7 @@ if(("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU") OR (("${CMAKE_CXX_COMPILER_ID}" MA
+   set(COMPILER_IS_LIKE_GNU TRUE)
+ endif()
+ if(${COMPILER_IS_LIKE_GNU})
+-  set(SPIRV_WARNINGS -Wall -Wextra -Wnon-virtual-dtor -Wno-missing-field-initializers)
++  set(SPIRV_WARNINGS -Wnon-virtual-dtor -Wno-missing-field-initializers)
+ 
+   if("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
+     set(SPIRV_WARNINGS ${SPIRV_WARNINGS} -Wno-self-assign)
+@@ -113,7 +113,7 @@ if(${COMPILER_IS_LIKE_GNU})
+   endif()
+ 
+   if(${SPIRV_WERROR})
+-    set(SPIRV_WARNINGS ${SPIRV_WARNINGS} -Werror)
++    set(SPIRV_WARNINGS ${SPIRV_WARNINGS} )
+   endif()
+ elseif(MSVC)
+   set(SPIRV_WARNINGS -D_CRT_SECURE_NO_WARNINGS -D_SCL_SECURE_NO_WARNINGS /wd4800 /wd4819)
+@@ -186,7 +186,7 @@ function(spvtools_default_compile_options TARGET)
+   if (${COMPILER_IS_LIKE_GNU})
+     target_compile_options(${TARGET} PRIVATE -std=c++11 -fno-exceptions)
+     target_compile_options(${TARGET} PRIVATE
+-      -Wall -Wextra -Wno-long-long -Wshadow -Wundef -Wconversion
++      -Wno-long-long -Wshadow -Wundef -Wconversion
+       -Wno-sign-conversion)
+ 
+     if(NOT ENABLE_RTTI)
