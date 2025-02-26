@@ -11,6 +11,7 @@ import urllib
 import ssl
 import ctypes
 import zipfile
+import tarfile
 import shutil
 from urllib import request
 
@@ -53,19 +54,27 @@ def clone_git_repo(DXC_PACKAGE, DXC_VERSION):
   run({'git submodule update'})
   os.chdir(prev_cwd)
 
-def download_prebuilt_win(DXC_PACKAGE, DXC_VERSION, DXC_BIN_ZIP):
+def download_prebuilt_win(DXC_PACKAGE, DXC_VERSION):
+  DXC_BIN_ZIP = 'dxc_2024_07_31.zip'
   download_url('https://github.com/microsoft/{0}/releases/download/v{1}/{2}'.format(DXC_PACKAGE, DXC_VERSION, DXC_BIN_ZIP))
   with zipfile.ZipFile(os.path.normpath('.packages/{0}'.format(DXC_BIN_ZIP)), 'r') as zip_file:
     zip_file.extractall('.packages/_win')
 
+def download_prebuilt_linux(DXC_PACKAGE, DXC_VERSION):
+  DXC_BIN_TAR = 'linux_dxc_2024_07_31.x86_64.tar.gz'
+  download_url('https://github.com/microsoft/{0}/releases/download/v{1}/{2}'.format(DXC_PACKAGE, DXC_VERSION, DXC_BIN_TAR))
+  with tarfile.open(os.path.normpath('.packages/{0}'.format(DXC_BIN_TAR)), 'r:gz') as tar_file:
+    tar_file.extractall('.packages/_linux')
+    tar_file.close()
+
 # prepare base package data
 DXC_PACKAGE = 'DirectXShaderCompiler'
-DXC_VERSION = '1.7.2207'
-DXC_BIN_ZIP = 'dxc_2022_07_18.zip'
+DXC_VERSION = '1.8.2407'
 
 pathlib.Path('.packages').mkdir(parents=True, exist_ok=True)
 clone_git_repo(DXC_PACKAGE, DXC_VERSION)
-download_prebuilt_win(DXC_PACKAGE, DXC_VERSION, DXC_BIN_ZIP)
+download_prebuilt_win(DXC_PACKAGE, DXC_VERSION)
+download_prebuilt_linux(DXC_PACKAGE, DXC_VERSION)
 
 if pathlib.Path('DXC-{0}'.format(DXC_VERSION)).exists():
   shutil.rmtree('DXC-{0}'.format(DXC_VERSION))
@@ -77,6 +86,7 @@ pathlib.Path('DXC-{0}/lib/macosx'.format(DXC_VERSION)).mkdir(parents=True, exist
 
 shutil.copy2('{0}/LICENSE.TXT'.format(DXC_PACKAGE), 'DXC-{0}/LICENSE.TXT'.format(DXC_VERSION))
 shutil.copy2('.packages/_win/bin/x64/dxcompiler.dll', 'DXC-{0}/lib/win64/'.format(DXC_VERSION))
+shutil.copy2('.packages/_linux/lib/libdxcompiler.so', 'DXC-{0}/lib/linux64/'.format(DXC_VERSION))
 try:
   shutil.copytree('{0}/include/dxc'.format(DXC_PACKAGE), 'DXC-{0}/include/dxc'.format(DXC_VERSION), dirs_exist_ok=True, ignore_dangling_symlinks=True)
 except TypeError as e:
@@ -85,5 +95,5 @@ except OSError as e:
   print('Ignoring OSError {0}'.format(e))
 
 print('Basic folder prepared: DXC-{0}/include'.format(DXC_VERSION))
-print('Build linux64 and macosx libraries using ./s2_build_linux64.sh and ./s2_build_macosx.sh\n  (places results to ..lib/linux64 and ..lib/macosx)')
+print('Build linux64(if needed) and macosx libraries using ./s2_build_linux64.sh and ./s2_build_macosx.sh\n  (places results to ..lib/linux64 and ..lib/macosx)')
 print('And run ./s3_make_package.sh to finally get .tar.gz for upload')

@@ -3,7 +3,7 @@
 # scl enable devtoolset-11 llvm-toolset-7.0 './s2_build_linux64_cmake3.sh'
 
 DXC_PACKAGE="DirectXShaderCompiler"
-DXC_VERSION="1.7.2207"
+DXC_VERSION="1.8.2407"
 
 cd "$DXC_PACKAGE"
 
