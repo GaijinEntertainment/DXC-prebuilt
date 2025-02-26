@@ -50,8 +50,8 @@ def clone_git_repo(DXC_PACKAGE, DXC_VERSION):
   if DXC_VERSION == '1.7.2207':
     run('git cherry-pick 47f31378a9b51894b0465b33ac1d10ce6349a468')
     run('git cherry-pick 396e45cbc49cfba17adf3e813064b07ab4373659')
-  run({'git submodule init'})
-  run({'git submodule update'})
+  run('git submodule init')
+  run('git submodule update')
   os.chdir(prev_cwd)
 
 def download_prebuilt_win(DXC_PACKAGE, DXC_VERSION):
