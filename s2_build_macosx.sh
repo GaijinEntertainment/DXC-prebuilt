@@ -11,4 +11,4 @@ cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES="
 cmake --build .
 
 cd ..
-cp build/lib/libdxcompiler.3.7.dylib DXC-$DXC_VERSION/lib/macosx/dxcompiler.dylib
+cp build/lib/libdxcompiler.dylib DXC-$DXC_VERSION/lib/macosx/dxcompiler.dylib
