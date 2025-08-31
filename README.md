@@ -17,4 +17,4 @@ The last step (optional) is to run `s3_make_package.sh` which will build `.tar.g
 
 Releases will contain packaged `.tar.gz` archive with includes and prebuilt dynamic libs for win64, linux and macOS.
 
-Currently used DXC version is: 1.7.2207
+Currently used DXC version is: 1.8.2407

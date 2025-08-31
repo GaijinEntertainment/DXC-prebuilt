@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DXC_PACKAGE="DirectXShaderCompiler"
-DXC_VERSION="1.7.2207"
+DXC_VERSION="1.8.2407"
 
 cd "$DXC_PACKAGE"
 git checkout .
@@ -24,4 +24,4 @@ cmake ".." -DCMAKE_BUILD_TYPE=Release -C "../cmake/caches/PredefinedParams.cmake
 make -j$(nproc)
 
 cd ../..
-cp $DXC_PACKAGE/build/lib/libdxcompiler.so.3.7 DXC-$DXC_VERSION/lib/linux64/libdxcompiler.so
+cp $DXC_PACKAGE/build/lib/libdxcompiler.so DXC-$DXC_VERSION/lib/linux64/libdxcompiler.so
