@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DXC_PACKAGE="DirectXShaderCompiler"
-DXC_VERSION="1.8.2407"
+DXC_VERSION="1.8.2505.1"
 
 cd "$DXC_PACKAGE"
 

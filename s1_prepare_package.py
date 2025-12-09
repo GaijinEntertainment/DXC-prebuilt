@@ -55,13 +55,13 @@ def clone_git_repo(DXC_PACKAGE, DXC_VERSION):
   os.chdir(prev_cwd)
 
 def download_prebuilt_win(DXC_PACKAGE, DXC_VERSION):
-  DXC_BIN_ZIP = 'dxc_2024_07_31.zip'
+  DXC_BIN_ZIP = 'dxc_2025_07_14.zip'
   download_url('https://github.com/microsoft/{0}/releases/download/v{1}/{2}'.format(DXC_PACKAGE, DXC_VERSION, DXC_BIN_ZIP))
   with zipfile.ZipFile(os.path.normpath('.packages/{0}'.format(DXC_BIN_ZIP)), 'r') as zip_file:
     zip_file.extractall('.packages/_win')
 
 def download_prebuilt_linux(DXC_PACKAGE, DXC_VERSION):
-  DXC_BIN_TAR = 'linux_dxc_2024_07_31.x86_64.tar.gz'
+  DXC_BIN_TAR = 'linux_dxc_2025_07_14.x86_64.tar.gz'
   download_url('https://github.com/microsoft/{0}/releases/download/v{1}/{2}'.format(DXC_PACKAGE, DXC_VERSION, DXC_BIN_TAR))
   with tarfile.open(os.path.normpath('.packages/{0}'.format(DXC_BIN_TAR)), 'r:gz') as tar_file:
     tar_file.extractall('.packages/_linux')
@@ -69,7 +69,7 @@ def download_prebuilt_linux(DXC_PACKAGE, DXC_VERSION):
 
 # prepare base package data
 DXC_PACKAGE = 'DirectXShaderCompiler'
-DXC_VERSION = '1.8.2407'
+DXC_VERSION = '1.8.2505.1'
 
 pathlib.Path('.packages').mkdir(parents=True, exist_ok=True)
 clone_git_repo(DXC_PACKAGE, DXC_VERSION)
