@@ -81,12 +81,17 @@ if pathlib.Path('DXC-{0}'.format(DXC_VERSION)).exists():
 pathlib.Path('DXC-{0}/include'.format(DXC_VERSION)).mkdir(parents=True, exist_ok=True)
 pathlib.Path('DXC-{0}/lib'.format(DXC_VERSION)).mkdir(parents=True, exist_ok=True)
 pathlib.Path('DXC-{0}/lib/win64'.format(DXC_VERSION)).mkdir(parents=True, exist_ok=True)
+pathlib.Path('DXC-{0}/lib/win-arm64'.format(DXC_VERSION)).mkdir(parents=True, exist_ok=True)
 pathlib.Path('DXC-{0}/lib/linux64'.format(DXC_VERSION)).mkdir(parents=True, exist_ok=True)
 pathlib.Path('DXC-{0}/lib/macosx'.format(DXC_VERSION)).mkdir(parents=True, exist_ok=True)
 
 shutil.copy2('{0}/LICENSE.TXT'.format(DXC_PACKAGE), 'DXC-{0}/LICENSE.TXT'.format(DXC_VERSION))
 shutil.copy2('.packages/_win/bin/x64/dxcompiler.dll', 'DXC-{0}/lib/win64/'.format(DXC_VERSION))
+shutil.copy2('.packages/_win/bin/x64/dxil.dll', 'DXC-{0}/lib/win64/'.format(DXC_VERSION))
+shutil.copy2('.packages/_win/bin/arm64/dxcompiler.dll', 'DXC-{0}/lib/win-arm64/'.format(DXC_VERSION))
+shutil.copy2('.packages/_win/bin/arm64/dxil.dll', 'DXC-{0}/lib/win-arm64/'.format(DXC_VERSION))
 shutil.copy2('.packages/_linux/lib/libdxcompiler.so', 'DXC-{0}/lib/linux64/'.format(DXC_VERSION))
+shutil.copy2('.packages/_linux/lib/libdxil.so', 'DXC-{0}/lib/linux64/'.format(DXC_VERSION))
 try:
   shutil.copytree('{0}/include/dxc'.format(DXC_PACKAGE), 'DXC-{0}/include/dxc'.format(DXC_VERSION), dirs_exist_ok=True, ignore_dangling_symlinks=True)
 except TypeError as e:

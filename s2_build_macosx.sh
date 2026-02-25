@@ -12,3 +12,4 @@ cmake --build .
 
 cd ..
 cp build/lib/libdxcompiler.dylib DXC-$DXC_VERSION/lib/macosx/dxcompiler.dylib
+cp build/lib/libdxil.dylib DXC-$DXC_VERSION/lib/macosx/dxil.dylib

@@ -13,3 +13,4 @@ ninja
 
 cd ../..
 cp $DXC_PACKAGE/build/lib/libdxcompiler.so DXC-$DXC_VERSION/lib/linux64/libdxcompiler.so
+cp $DXC_PACKAGE/build/lib/libdxil.so DXC-$DXC_VERSION/lib/linux64/libdxil.so
